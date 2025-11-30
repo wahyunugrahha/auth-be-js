@@ -1,7 +1,7 @@
-const RegisterUser = require("../../../Domains/users/entities/RegisterUser");
-const RegisteredUser = require("../../../Domains/users/entities/RegisteredUser");
-const UserRepository = require("../../../Domains/users/UserRepository");
-const PasswordHash = require("../../security/PasswordHash");
+const RegisteredUser = require("../../../../Domains/users/entities/RegisteredUser");
+const RegisterUser = require("../../../../Domains/users/entities/RegisterUser");
+const UserRepository = require("../../../../Domains/users/UserRepository");
+const PasswordHash = require("../../PasswordHash");
 const AddUserUseCase = require("../AddUserUseCase");
 
 describe("AddUserUseCase", () => {
@@ -50,11 +50,11 @@ describe("AddUserUseCase", () => {
         fullname: useCasePayload.fullname,
       })
     );
-    expect(mockUserRepository.verifyAvailableUsername).toBeCalledWith(
+    expect(mockUserRepository.verifyAvailableUsername).toHaveBeenCalledWith(
       useCasePayload.username
     );
-    expect(mockPasswordHash.hash).toBeCalledWith(useCasePayload.password);
-    expect(mockUserRepository.addUser).toBeCalledWith(
+    expect(mockPasswordHash.hash).toHaveBeenCalledWith(useCasePayload.password);
+    expect(mockUserRepository.addUser).toHaveBeenCalledWith(
       new RegisterUser({
         username: useCasePayload.username,
         password: "encrypted_password",

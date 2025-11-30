@@ -1,11 +1,16 @@
-class UserRepository {
-  async addUser(registerUser) {
-    throw new Error("USER_REPOSITORY.METHOD_NOT_IMPLEMENTED");
-  }
+const UserRepository = require("../UserRepository");
 
-  async verifyAvailableUsername(username) {
-    throw new Error("USER_REPOSITORY.METHOD_NOT_IMPLEMENTED");
-  }
-}
+describe("UserRepository interface", () => {
+  it("should throw error when invoke abstract behavior", async () => {
+    // Arrange
+    const userRepository = new UserRepository();
 
-module.exports = UserRepository;
+    // Action and Assert
+    await expect(userRepository.addUser({})).rejects.toThrow(
+      "USER_REPOSITORY.METHOD_NOT_IMPLEMENTED"
+    );
+    await expect(
+      userRepository.verifyAvailableUsername("")
+    ).rejects.toThrow("USER_REPOSITORY.METHOD_NOT_IMPLEMENTED");
+  });
+});
